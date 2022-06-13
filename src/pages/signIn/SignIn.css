@@ -1,0 +1,58 @@
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(185, 185, 185);
+}
+
+.txt{
+    font: 24px serif;
+    font-weight: bold;
+    color: white;
+}
+
+.signInForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+
+.cred {
+    text-align: unset;
+    text-indent: 10px;
+  font-family: inherit;
+  text-decoration-color: black;
+  width: 230px;
+  height: 20px;
+  border: 0;
+  border-bottom: 2px solid #777777;
+  outline: 0;
+  font-size: 15px;
+  padding: 7px 0;
+  background-color: #f0eeee;
+  border-radius: 20px;
+  transition: border-color 0.2s;
+}
+input:focus{
+    border-bottom: 2px solid #0004ff;
+}
+input::placeholder {
+    position: relative;
+    left: 0px;
+    font: 14px sans-serif;
+}
+.crtAcct{
+    font: 14px sans-serif;
+    cursor: pointer;
+    color: white;
+}
+.crtAcct:hover{
+    color: rgb(255, 0, 0);
+
+}

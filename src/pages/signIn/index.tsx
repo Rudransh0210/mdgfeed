@@ -1,29 +1,21 @@
-import { render } from "@testing-library/react";
-import React, { useState } from "react";
-import Button from "../../components/Button";
-import InputField from "../../components/InputField"
-import {auth} from "../../constants/firebase";
-import {useNavigate} from "react-router-dom"
-import { classicNameResolver } from "typescript";
+import React from "react";
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../services/firebase";
+import {useNavigate} from "react-router-dom";
+import './SignIn.css';
 
 const SignIn : React.FC = () => {
     const navigate = useNavigate();
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
-    function signin(){
-        console.log((document.getElementById("email") as HTMLInputElement).value);
-        console.log((document.getElementById("password") as HTMLInputElement).value);
-
-        setEmail((document.getElementById("email") as HTMLInputElement).value);
-        setPassword((document.getElementById("password") as HTMLInputElement).value);
-
-        auth.signInWithEmailAndPassword(Email , Password)
+    const SignIn=()=>{
+        signInWithEmailAndPassword(auth, Email, Password)
         .then((userCredential) => {
-            console.log(userCredential.user);
-            let user = userCredential.user;
-            console.log(user?.uid);
-            navigate("/mdgfeed")
-        })
+        const user = userCredential.user;
+        navigate("/mdgfeed");
+        
+    })
         .catch((error) => {
             console.log(error);
             if (error.toString().slice(0,83) == "FirebaseError: Firebase: The email address is badly formatted. (auth/invalid-email)" ){
@@ -35,24 +27,28 @@ const SignIn : React.FC = () => {
             else if (error.toString().slice(0,108) == "FirebaseError: Firebase: The email address is already in use by another account. (auth/email-already-in-use)"){
                 alert("User already exists with same email");
             }
-            else { alert("Error has occurred... Contact Mono");console.log(error);}
+            else { alert("Error has occurred... ");console.log(error);}
         })
     }
     return(
-            <div>
-                <InputField 
-                id = "email"
-                type = "email"
-                label = "Email"/>
-                <InputField
-                id = "password"
-                type = "password"
-                label = "Password"/>
-                <Button 
-                text = "Login"
-                onClick={signin}/>
+            <div className="main">
+            <div className="SignInbox">
+                    <p className="txt">SignIn</p>
+                <form className="signInForm">
+                    
+                    <input className="cred" placeholder="Email" type="text" onChange={(e)=>{setEmail(e.target.value)}} />
+                    <input className="cred" placeholder="Password"  type="password" onChange={(e)=>{setPassword(e.target.value)}} />
+                    <div className="selectInt">
+                    </div>
+                </form>
+                    <button onClick={()=>{SignIn()}} >SignIn</button>
+                    <p className="crtAcct" onClick={()=>{
+                        navigate("/Signup");
+                    }} >Create an Account
+                    </p>
             </div>
-        )
+        </div>
+    );
 }
 
 export default SignIn;
