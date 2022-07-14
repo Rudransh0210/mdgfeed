@@ -6,9 +6,11 @@ import {useNavigate} from "react-router-dom";
 import './SignIn.css';
 
 const SignIn : React.FC = () => {
+    // state should have type mentioned as => useState<string>("");
     const navigate = useNavigate();
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
+    // All the functiones dealing with firebase were supposed to be firebase service folder.
     const SignIn=()=>{
         signInWithEmailAndPassword(auth, Email, Password)
         .then((userCredential) => {
@@ -31,6 +33,7 @@ const SignIn : React.FC = () => {
         })
     }
     return(
+        // What is this HTML structure ?? unnecessary div and react.fragments 
             <div className="main">
             <div className="SignInbox">
                     <p className="txt">SignIn</p>
@@ -41,8 +44,10 @@ const SignIn : React.FC = () => {
                     <div className="selectInt">
                     </div>
                 </form>
+                {/* SignIn could have been directly passed as a fucntion. */}
                     <button onClick={()=>{SignIn()}} >SignIn</button>
                     <p className="crtAcct" onClick={()=>{
+                        // This Route seems wrong.!!!
                         navigate("/Signup");
                     }} >Create an Account
                     </p>

@@ -6,7 +6,8 @@ import { auth, db } from '../../services/firebase';
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 
-
+// Put this inside the Constants folder.
+// MAke interest a model.
 const interestData = [
     { name: "Dance" },
     { name: "Music" },
@@ -19,7 +20,9 @@ const interestData = [
   ];
 
 const SignUp:React.FC =()=>{
-
+    
+    // state should have type mentioned as => useState<string>("");
+    // Why use any ???
     const [interests, setInterests] = useState<any>([]);
     var finalInterests: any[] =[];
     const [email,setEmail] =useState("");
@@ -27,10 +30,12 @@ const SignUp:React.FC =()=>{
     const [password,setPassword] =useState("");
     const navigate = useNavigate();
     
+    // These functions can be much much simpler, easier to implement and straightforward.
     useEffect(() => {
           setInterests(interestData);
       }, []);
-
+      // Make the type a seperate type.
+      // Make the interest type already have a isChecked property. 
       const handleChange = (e: { target: { name: any; checked: any; }; }) => {
         const { name, checked } = e.target;
         if (name === "allSelect") {
@@ -62,6 +67,8 @@ const SignUp:React.FC =()=>{
               interests: finalInterests,
             });
 
+            
+            // remove console.log before pushing to github
             console.log(user.uid);
             navigate("/mdgfeed");
           })
@@ -79,6 +86,8 @@ const SignUp:React.FC =()=>{
         });
     }
     return(
+      // What is this HTML structure ?? unnecessary div and react.fragments 
+      // Why is this  main div in everyfile ? if requried It could have been inside the parent file.
         <div className="main">
             <div className="box">
                     <p className="txt">SignUp</p>
@@ -95,15 +104,18 @@ const SignUp:React.FC =()=>{
                     onChange={handleChange}
             />
             <label className="form-check-label ms-2">All Select</label>
+            {/* EXCUSE ME....What is this ????? line 108 */}
                     {interests.map((interest: { name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | null | undefined; isChecked: any; }, index: React.Key | null | undefined) => (
                     <div className="form-check" key={index}>
                         <input
                         type="checkbox"
                         className="form-check-input"
                         name={interest.name as string}
+                        // Why is this null check here, also if something is null, use ?? instead of  || 
                         checked={interest?.isChecked || false}
                         onChange={handleChange}
                         />
+                        {/* Where is this ms-2 css class defined? Basically asking have u used bootstrap ?? */}
                         <label className="form-check-label ms-2">{interest.name}</label>
                     </div>))}
                     </div>

@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 const axiosConfig: AxiosRequestConfig = {
+  // Have u used an env file ??
   baseURL: process.env.BASE_URL || "https://zoo-animal-api.herokuapp.com",
   responseType: "json",
 };

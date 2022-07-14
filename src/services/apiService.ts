@@ -7,6 +7,7 @@ class ApiService {
         let reponse: AxiosResponse<any> = await axios.get(url);
         return reponse.data;
     }
+    // Error handling should be here in ApiService.
 }
 
 export default ApiService;

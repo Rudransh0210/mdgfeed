@@ -16,4 +16,13 @@ const App : React.FC = () => {
     )
 }
 
+// For folder and file structure follow the convention mentioned during the lecture.(refer Services, API and Firebae)
+// > services
+//    >api
+//       >axios.ts
+//       >apiService.ts
+//       >animalApi.ts
+//    >firebase
+
+// The code we gave was for reference ONLY.
 export default App;

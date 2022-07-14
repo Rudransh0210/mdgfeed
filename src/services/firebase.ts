@@ -3,6 +3,7 @@ import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
+// Why not put APiKey is env file as well ??
 const app  =  initializeApp({
     apiKey: "AIzaSyDVQokorB8B5vl-1AEpvVHrjfmrX1oRL6M",
     authDomain: "mdgfeed-fdc40.firebaseapp.com",
